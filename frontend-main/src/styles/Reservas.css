@@ -1,0 +1,142 @@
+.reservas-section {
+  min-height: calc(100vh - 160px);
+  padding: 60px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.reservas-container {
+  width: 100%;
+  max-width: 550px;
+}
+
+.reservas-title {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 8px;
+  color: #222;
+}
+
+.reservas-subtitle {
+  text-align: center;
+  color: #555;
+  margin-bottom: 40px;
+}
+
+.reservas-info-box {
+  background: white;
+  padding: 35px;
+  border-radius: 14px;
+  box-shadow: 0px 10px 25px rgba(0,0,0,0.08);
+}
+
+.search-input {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #111;
+}
+
+.btn-reservas-register {
+  background: #111;
+  color: white;
+  padding: 12px;
+  font-size: 15px;
+  border-radius: 10px;
+  font-weight: bold;
+  transition: background 0.2s ease;
+}
+
+.btn-reservas-register:hover {
+  background:#333;
+}
+
+.reservas-login-text {
+  font-size: 14px;
+  color: #444;
+}
+
+.reservas-login-link {
+  color: #099cdb;
+  font-weight: bold;
+}
+
+.reservas-success {
+  text-align: center;
+}
+
+.reservas-success h2 {
+  color: green;
+}
+
+.reservas-success h1 {
+  font-size: 36px;
+  margin: 15px 0;
+}
+
+@media (max-width: 500px) {
+  .reservas-info-box {
+    padding: 25px 20px;
+  }
+
+  .reservas-title {
+    font-size: 26px;
+  }
+}
+body.dark .reservas-section {
+  background: #121212;
+}
+
+body.dark .reservas-title {
+  color: #e5e5e5;
+}
+
+body.dark .reservas-subtitle {
+  color: #b5b5b5;
+}
+
+body.dark .reservas-info-box {
+  background: #1e1e1e;
+  box-shadow: 0px 10px 25px rgba(0,0,0,0.6);
+}
+
+body.dark .search-input {
+  background: #2a2a2a;
+  border: 1px solid #555;
+  color: #f1f1f1;
+}
+
+body.dark .search-input:focus {
+  border-color: #777;
+}
+
+body.dark .btn-reservas-register {
+  background: #333;
+  color: white;
+}
+
+body.dark .btn-reservas-register:hover {
+  background: #444;
+}
+
+body.dark .reservas-login-text {
+  color: #ccc;
+}
+
+body.dark .reservas-login-link {
+  color: #4da3ff;
+}
+
+body.dark .reservas-success h2 {
+  color: #6ee7b7; 
+}
+
+body.dark .reservas-success h1 {
+  color: #f1f1f1;
+}

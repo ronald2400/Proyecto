@@ -1,0 +1,147 @@
+.header {
+  width: 100%;
+  background: rgb(255, 223, 188);
+  padding: 12px 30px;
+  display: grid;
+  grid-template-columns: auto 1fr auto; 
+  align-items: center;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 45px;
+}
+
+.menu-btn {
+  display: none;
+  font-size: 26px;
+  background: none;
+  color: rgb(0, 0, 0);
+}
+
+.nav {
+  display: contents;
+}
+
+.nav-left {
+  display: flex;
+  justify-content: center; 
+  gap: 25px;
+}
+
+.nav-left a {
+  color: rgb(0, 0, 0);
+  font-weight: 700;
+}
+
+
+.nav-right {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+  align-items: center;
+}
+
+
+.btn {
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.login {
+  background: white;
+  color: black;
+}
+
+.register {
+  border: 1px solid white;
+  color: white;
+  background-color: rgb(48, 89, 213);
+}
+
+.btn-darkmode-img {
+  width: 26px;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .menu-btn {
+    display: block;
+    margin-left: auto;       
+    justify-self: end;     
+  }
+
+  .header {
+    grid-template-columns: auto 1fr;
+  }
+
+  .nav {
+    position: absolute;
+    top: 65px;
+    left: 0;
+    width: 100%;
+    background: #111;
+    padding: 20px 0;
+    display: none;
+
+    z-index: 9999;         
+  }
+
+  .nav.open {
+    display: block;
+    background-color: rgba(255, 223, 188, 0.9);
+  }
+
+  .nav.open .nav-left a,
+  .nav.open .nav-right a {
+    width: 100%;
+    text-align: center;
+    padding: 12px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .nav-left,
+  .nav-right {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+}
+
+body.dark .header {
+  background: #1e1e1e;
+  color: #f0f0f0;
+}
+
+body.dark .nav-left a,
+body.dark .nav-right a {
+  color: #f0f0f0;
+}
+
+body.dark .login {
+  background-color: #2a2a2a;
+  color: #f0f0f0;
+}
+
+body.dark .register {
+  background-color: #3450a1;
+  border-color: #3450a1;
+}
+
+body.dark .menu-btn {
+  color: #f0f0f0;
+}
+
+body.dark .nav.open {
+  background-color: rgba(30, 30, 30, 0.9);
+}
+
+body.dark .nav.open .nav-left a,
+body.dark .nav.open .nav-right a {
+  border-top-color: rgba(255, 255, 255, 0.2);
+}

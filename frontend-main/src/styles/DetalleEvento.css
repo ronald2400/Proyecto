@@ -1,0 +1,128 @@
+.detalle-evento-section {
+  min-height: calc(100vh - 160px);
+  padding: 60px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.detalle-evento-container {
+  width: 100%;
+  max-width: 1200px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.08);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+}
+
+.detalle-evento-img {
+  width: 100%;
+  height: 100%;
+  background: #ddd;
+}
+
+.detalle-evento-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.detalle-evento-info {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.detalle-evento-info h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.detalle-evento-info p {
+  font-size: 15px;
+  color: #444;
+  margin-bottom: 8px;
+}
+
+.detalle-evento-info h3 {
+  margin-top: 20px;
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+
+.detalle-evento-info .btn-evento {
+  width: 100%;
+  font-size: 14px;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.detalle-evento-info a.btn-evento {
+  display: block;
+}
+
+.detalle-evento-info .btn-evento:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+  transition: 0.2s ease;
+}
+
+.detalle-evento-info a:last-child {
+  margin-top: 12px;
+  font-size: 14px;
+}
+
+@media (max-width: 900px) {
+  .detalle-evento-container {
+    grid-template-columns: 1fr;
+  }
+
+  .detalle-evento-img {
+    height: 260px;
+  }
+
+  .detalle-evento-info {
+    padding: 30px 20px;
+  }
+
+  .detalle-evento-info h1 {
+    font-size: 26px;
+  }
+}
+body.dark .detalle-evento-section {
+  background: #121212;
+}
+
+body.dark .detalle-evento-container {
+  background: #1d1d1d;
+  box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.45);
+}
+
+body.dark .detalle-evento-info h1 {
+  color: #f1f1f1;
+}
+
+body.dark .detalle-evento-info h3 {
+  color: #e0e0e0;
+}
+
+body.dark .detalle-evento-info p {
+  color: #cccccc;
+}
+
+body.dark .detalle-evento-img {
+  background: #333;
+}
+
+body.dark .btn-evento {
+  background: #333 !important;
+  color: white !important;
+}
+
+body.dark .btn-evento:hover {
+  background: #444 !important;
+}

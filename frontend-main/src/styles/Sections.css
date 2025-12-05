@@ -1,0 +1,133 @@
+.secciones-home {
+  width: 100%;
+  background: white;
+  padding: 60px 0;
+  overflow-x: hidden;  
+  min-height: 100vh;  
+}
+
+.reserva-minutos {
+  max-width: 1200px;
+  margin: 0 auto 80px auto;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.reserva-minutos h2 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.pasos-container {
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.paso {
+  text-align: center;
+}
+
+.paso img {
+  width: 90px;
+  margin-bottom: 10px;
+}
+
+.flecha {
+  font-size: 30px;
+}
+
+
+.nosotros {
+  width: 100%;
+  background: #f0f0f0;
+  padding: 60px 0;
+}
+
+.nosotros-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px; 
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+.nosotros-texto h2 {
+  margin-bottom: 20px;
+}
+
+.nosotros-valores {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.valor {
+  background: white;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+
+@media (max-width: 768px) {
+  .nosotros-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+body.dark .secciones-home {
+  background: #121212;
+  color: #e6e6e6;
+}
+
+body.dark .nosotros {
+  background: #1b1b1b;
+}
+
+body.dark .valor {
+  background: #222;
+  color: #e6e6e6;
+}
+
+body.dark .paso img {
+  filter: brightness(0.8);
+}
+body.dark .secciones-home {
+  background: #121212;
+  color: #e6e6e6;
+}
+
+body.dark .reserva-minutos h2 {
+  color: #f1f1f1;
+}
+
+body.dark .paso img {
+  filter: brightness(0.75);
+}
+
+body.dark .flecha {
+  color: #cccccc;
+}
+
+body.dark .nosotros {
+  background: #1b1b1b;
+}
+
+body.dark .nosotros-texto h2 {
+  color: #f1f1f1;
+}
+
+body.dark .nosotros-texto p {
+  color: #cccccc;
+}
+
+body.dark .nosotros-valores .valor {
+  background: #222;
+  color: #e6e6e6;
+  box-shadow: 0 0 8px rgba(0,0,0,0.4);
+}

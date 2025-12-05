@@ -1,0 +1,1386 @@
+
+
+
+/* ================= PAGINA RESERVAS ================= */
+.reservas-section {
+  width: 100%;
+  padding: 70px 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.reservas-container {
+  width: 100%;
+  max-width: 900px;
+  background-color: white;
+  padding: 40px;
+  border-radius: 18px;
+  text-align: center;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+}
+
+body.dark .reservas-container {
+  background-color: #1c1c2b;
+}
+
+.reservas-title {
+  font-size: 2.4rem;
+  margin-bottom: 10px;
+}
+
+.reservas-subtitle {
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 30px;
+}
+
+
+.reservas-info-box {
+  background-color: #f8fafc;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+  text-align: left;
+}
+
+body.dark .reservas-info-box {
+  background-color: #232335;
+}
+
+.reservas-info-box h2 {
+  margin-bottom: 15px;
+  font-size: 1.4rem;
+}
+
+.reservas-info-box ul {
+  list-style: none;
+  margin-top: 10px;
+  padding-left: 0;
+}
+
+.reservas-info-box li {
+  margin-bottom: 10px;
+  font-size: 1rem;
+  color: #333;
+}
+
+body.dark .reservas-info-box li {
+  color: #e2e8f0;
+}
+
+
+.btn-reservas-register {
+  margin-top: 20px;
+  width: 100%;
+  padding: 14px;
+  background-color: #2563eb;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-reservas-register:hover {
+  background-color: #1d4ed8;
+}
+
+
+.reservas-login-text {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+.reservas-login-link {
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.reservas-login-link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .reservas-container {
+    padding: 25px;
+  }
+
+  .reservas-info-box {
+    padding: 20px;
+  }
+}
+
+
+body.dark {
+  background-color: #121212;
+  color: #f5f5f5;
+}
+
+
+body.dark .header,
+body.dark nav {
+  background-color: #1e1e1e;
+}
+
+body.dark a {
+  color: #fff;
+}
+
+
+body.dark .evento-card {
+  background-color: #1e1e1e;
+  color: white;
+}
+
+
+body.dark .btn,
+body.dark .btn-evento,
+body.dark .btn-reservas-register {
+  background-color: #333;
+  color: white;
+  border: 1px solid #777;
+}
+
+
+body.dark .reservas-info-box {
+  background-color: #1e1e1e;
+  color: white;
+}
+
+/*----------REGISTRO-------------- */
+
+.register-container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+
+.register-left {
+  width: 50%;
+  background: #e0e6f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.register-right {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.register-box {
+  width: 80%;
+  max-width: 400px;
+}
+
+.register-title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.register-form input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+  font-size: 15px;
+}
+
+.password-wrapper {
+  position: relative;
+}
+
+.eye-icon {
+  position: absolute;
+  right: 10px;
+  top: 30%;
+  cursor: pointer;
+}
+
+.register-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #2d77ff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+.register-btn:hover {
+  opacity: 0.9;
+}
+
+.register-login-text {
+  margin-top: 15px;
+  text-align: center;
+  color: #666;
+}
+
+.login-link {
+  color: #0066ff;
+}
+
+
+@media (max-width: 900px) {
+  .register-container {
+    flex-direction: column;
+  }
+
+  .register-left,
+  .register-right {
+    width: 100%;
+    height: 50vh;
+  }
+}
+
+/*        ADMIN PANEL            */
+/* ============================= */
+
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #f5f7fa;
+}
+
+/* ===== SIDEBAR ===== */
+.admin-sidebar {
+  width: 250px;
+  background: #1f3b53;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.admin-profile {
+  text-align: center;
+}
+
+.admin-avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.admin-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.admin-menu a {
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 8px;
+  transition: background 0.3s;
+}
+
+.admin-menu a:hover,
+.admin-menu a.active {
+  background: #2f5d85;
+}
+
+.admin-logout a {
+  background: white;
+  color: #1f3b53;
+  padding: 10px;
+  text-align: center;
+  border-radius: 8px;
+  text-decoration: none;
+  display: block;
+}
+
+/* ===== CONTENIDO ===== */
+.admin-content {
+  flex: 1;
+  padding: 30px;
+}
+
+.admin-content h1 {
+  margin-bottom: 30px;
+  font-size: 28px;
+}
+
+/* ===== TARJETAS ===== */
+.admin-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+}
+
+.admin-card {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.admin-number {
+  font-size: 42px;
+  font-weight: bold;
+  color: #1f3b53;
+}
+
+.admin-btn {
+  margin-top: 10px;
+  padding: 10px 16px;
+  border: none;
+  background: #3b82f6;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.admin-btn.outline {
+  background: transparent;
+  border: 2px solid #3b82f6;
+  color: #3b82f6;
+}
+
+.admin-btn:hover {
+  opacity: 0.9;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .admin-layout {
+    flex-direction: column;
+  }
+
+  .admin-sidebar {
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .admin-menu {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .admin-logout {
+    display: none;
+  }
+}
+
+/* ===== GESTION DE EVENTOS ===== */
+
+.eventos-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  gap: 15px;
+}
+
+.buscador {
+  display: flex;
+  align-items: center;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 8px 12px;
+  width: 250px;
+}
+
+.buscador input {
+  border: none;
+  outline: none;
+  flex: 1;
+}
+
+.tabla-container {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.tabla-eventos {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabla-eventos th,
+.tabla-eventos td {
+  padding: 14px;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+}
+
+.tabla-eventos th {
+  background: #f4f6f9;
+  font-weight: bold;
+}
+
+.acciones button {
+  margin: 0 4px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.acciones button:hover {
+  transform: scale(1.2);
+}
+
+.form-evento {
+  max-width: 1500px;          /* ⬅️ MÁS ANCHO */
+  margin: 50px auto;        /* ⬅️ MÁS SEPARADO DEL HEADER */
+  background: var(--card-bg, #ffffff);
+  padding: 50px;            /* ⬅️ MÁS AIRE INTERIOR */
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+/* ===== GRUPOS DE CAMPOS ===== */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-weight: 600;
+  font-size: 14px;
+  color: #333;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  outline: none;
+  transition: 0.2s ease-in-out;
+  background: #fafafa;
+}
+
+/* Efecto focus */
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #6c63ff;
+  background: #ffffff;
+  box-shadow: 0 0 0 2px rgba(108,99,255,0.15);
+}
+
+/* Tamaño del textarea */
+.form-group textarea {
+  min-height: 110px;
+  resize: none;
+}
+
+/* =========================
+   BOTONES DEL FORMULARIO
+========================= */
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+/* Botón principal ya existente */
+.admin-btn {
+  padding: 12px 22px;
+  border-radius: 10px;
+  border: none;
+  background: #6c63ff;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+
+.admin-btn:hover {
+  background: #584ff7;
+  transform: translateY(-1px);
+}
+
+/* Botón secundario */
+.admin-btn.outline {
+  background: transparent;
+  color: #6c63ff;
+  border: 2px solid #6c63ff;
+}
+
+.admin-btn.outline:hover {
+  background: #6c63ff;
+  color: #fff;
+}
+
+/* =========================
+   TÍTULO DE LA PÁGINA
+========================= */
+
+.admin-content h1 {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #2c2c2c;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+  .form-evento {
+    padding: 25px;
+    margin: 20px;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+
+  .admin-btn,
+  .admin-btn.outline {
+    width: 100%;
+  }
+}
+
+/* ===============================
+   VER EVENTO ADMIN
+================================ */
+
+.ver-evento-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+  margin-top: 40px;
+  align-items: center;
+}
+
+.ver-evento-imagen {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.imagen-evento-detalle {
+  width: 100%;
+  max-width: 480px;
+  height: auto;
+  border-radius: 18px;
+  object-fit: cover;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.ver-evento-info {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  font-size: 16px;
+  color: #333;
+}
+
+.ver-evento-info p strong {
+  color: #000;
+}
+
+.ver-evento-info p {
+  line-height: 1.6;
+}
+
+.ver-evento-botones {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+/* ===============================
+   RESPONSIVE VER EVENTO
+================================ */
+
+@media (max-width: 900px) {
+  .ver-evento-card {
+    grid-template-columns: 1fr;
+    padding: 25px;
+  }
+
+  .imagen-evento-detalle {
+    max-width: 100%;
+  }
+
+  .ver-evento-botones {
+    flex-direction: column;
+  }
+}
+
+/* ====== Layout administrador ====== */
+.admin-layout {
+  display: flex;
+  min-height: calc(100vh - 120px); /* Ajuste por header y footer */
+}
+
+/* ====== Sidebar ====== */
+.admin-sidebar {
+  width: 220px;
+  background-color: #1f3b53;
+  color: white;
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.admin-profile {
+  text-align: center;
+}
+
+.admin-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 0.5rem;
+}
+
+.admin-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.admin-menu a {
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.admin-menu a.active,
+.admin-menu a:hover {
+  background-color: #2563eb;
+  color: white;
+}
+
+.admin-logout {
+  margin-top: auto;
+}
+
+.admin-logout a {
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.admin-logout a:hover {
+  background-color: #ef4444;
+  color: white;
+}
+
+/* ====== Contenido principal ====== */
+.admin-content {
+  flex: 1;
+  padding: 2rem;
+  overflow-x: hidden;
+}
+
+.admin-content h1 {
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  color: #1f2937;
+}
+
+/* ====== Toolbar de reportes ====== */
+.reportes-toolbar {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+  align-items: center;
+}
+
+.reportes-toolbar input[type="text"] {
+  flex: 1;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 0.95rem;
+}
+
+.fecha-filtros {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.fecha-filtros label {
+  font-size: 0.9rem;
+  color: #1f2937;
+}
+
+.fecha-filtros input[type="date"] {
+  padding: 0.4rem 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* Select para tipo de reporte */
+.reportes-toolbar select {
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: white;
+  font-size: 0.95rem;
+}
+
+/* ====== Tabla de reportes ====== */
+.tabla-container {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  overflow-x: auto;
+}
+
+.tabla-eventos {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabla-eventos th,
+.tabla-eventos td {
+  padding: 0.75rem 1rem;
+  text-align: center;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 0.95rem;
+}
+
+.tabla-eventos th {
+  background-color: #f4f6f9;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+/* Mensaje de "No hay resultados" */
+.tabla-eventos td[colspan] {
+  text-align: center;
+  padding: 1rem;
+  font-style: italic;
+  color: #6b7280;
+}
+
+/* ====== Responsive ====== */
+@media (max-width: 900px) {
+  .admin-layout {
+    flex-direction: column;
+  }
+
+  .admin-sidebar {
+    width: 100%;
+    flex-direction: row;
+    overflow-x: auto;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .admin-menu {
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+
+  .admin-logout {
+    margin-left: auto;
+  }
+
+  .reportes-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .tabla-eventos th,
+  .tabla-eventos td {
+    font-size: 0.85rem;
+    padding: 0.5rem;
+  }
+}
+/* =========================
+   VISTAS DE USUARIO
+========================= */
+
+/* ===== Layout principal ===== */
+.user-layout {
+  display: flex;
+  min-height: calc(100vh - 120px); /* Ajuste por header y footer */
+  background-color: #f5f5f5;
+}
+
+/* ===== Sidebar ===== */
+.user-sidebar {
+  width: 220px;
+  background-color: #ffffff;
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  border-right: 1px solid #e5e7eb;
+}
+
+.user-profile {
+  text-align: center;
+}
+
+.user-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 0.5rem;
+}
+
+.user-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.user-menu a {
+  text-decoration: none;
+  color: #1f2937;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.user-menu a.active,
+.user-menu a:hover {
+  background-color: #2563eb;
+  color: white;
+}
+
+.user-logout {
+  margin-top: auto;
+}
+
+.user-logout a {
+  text-decoration: none;
+  color: #000;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.user-logout a:hover {
+  background-color: #ef4444;
+  color: white;
+}
+
+/* ===== Contenido principal ===== */
+.user-content {
+  flex: 1;
+  padding: 2rem;
+  overflow-x: hidden;
+}
+
+.user-content h1 {
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  color: #1f2937;
+}
+
+/* ===== Sección de eventos/ reservas ===== */
+.user-events-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.user-event-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  flex: 1 1 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  transition: transform 0.2s;
+}
+
+.user-event-card:hover {
+  transform: translateY(-5px);
+}
+
+.user-event-img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.user-event-card h3 {
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+/* Icono "ver" */
+.view-icon {
+  background-color: #2563eb;
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  transition: background 0.2s;
+}
+
+.view-icon:hover {
+  background-color: #1d4ed8;
+}
+
+/* ===== Botones ===== */
+.user-btn {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.user-btn:hover {
+  background-color: #1d4ed8;
+}
+
+/* ===== Dark mode específico ===== */
+body.dark .user-layout {
+  background-color: #121212;
+}
+
+body.dark .user-sidebar {
+  background-color: #1e1e1e;
+  border-right: 1px solid #333;
+}
+
+body.dark .user-menu a {
+  color: #f1f5f9;
+}
+
+body.dark .user-menu a.active,
+body.dark .user-menu a:hover {
+  background-color: #3b82f6;
+}
+
+body.dark .user-logout a {
+  color: #f1f5f9;
+}
+
+body.dark .user-logout a:hover {
+  background-color: #ef4444;
+}
+
+body.dark .user-content h1,
+body.dark .user-event-card h3 {
+  color: #f1f5f9;
+}
+
+body.dark .user-event-card {
+  background-color: #1c1c2b;
+  color: #f1f5f9;
+}
+
+body.dark .view-icon {
+  background-color: #3b82f6;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+  .user-layout {
+    flex-direction: column;
+  }
+
+  .user-sidebar {
+    width: 100%;
+    flex-direction: row;
+    overflow-x: auto;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .user-menu {
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+
+  .user-logout {
+    margin-left: auto;
+  }
+
+  .user-events-container {
+    flex-direction: column;
+  }
+
+  .user-event-card {
+    position: relative;
+  }
+}
+/* ================== LAYOUT USUARIO ================== */
+.user-layout {
+  display: flex;
+  min-height: calc(100vh - 140px); /* header + footer */
+}
+
+/* Sidebar */
+.user-sidebar {
+  width: 220px;
+  background-color: #fefefe;
+  border-right: 1px solid #ddd;
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.user-profile {
+  text-align: center;
+}
+
+.user-avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 0.5rem;
+}
+
+.user-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.user-menu a {
+  text-decoration: none;
+  color: #1f2937;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.user-menu a.active,
+.user-menu a:hover {
+  background-color: #2563eb;
+  color: white;
+}
+
+.user-logout {
+  margin-top: auto;
+}
+
+.user-logout a {
+  text-decoration: none;
+  color: #ef4444;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.user-logout a:hover {
+  background-color: #ef4444;
+  color: white;
+}
+
+/* Contenido principal */
+.user-content {
+  flex: 1;
+  padding: 2rem;
+}
+
+/* Título de la página */
+.user-page-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #1f2937;
+}
+
+/* Card */
+.user-card {
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+
+/* Lista de reservas */
+.user-reservas-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-reserva-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #eee;
+  transition: background 0.2s;
+}
+
+.user-reserva-item:last-child {
+  border-bottom: none;
+}
+
+.user-reserva-item:hover {
+  background-color: #f3f4f6;
+}
+
+.user-reserva-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.user-reserva-link:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .user-layout {
+    flex-direction: column;
+  }
+
+  .user-sidebar {
+    width: 100%;
+    flex-direction: row;
+    overflow-x: auto;
+    border-right: none;
+    border-bottom: 1px solid #ddd;
+    padding: 1rem;
+  }
+
+  .user-menu {
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+
+  .user-logout {
+    margin-left: auto;
+  }
+}/* ================== DETALLE DE EVENTO ================== */
+.event-detail-card {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.event-detail-img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.event-detail-info {
+  padding: 2rem;
+}
+
+.event-detail-info h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.event-description {
+  margin-bottom: 1.5rem;
+  color: #4b5563;
+}
+
+.event-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.event-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #2563eb;
+  font-weight: 500;
+}
+
+/* Botones */
+.event-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn {
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: background 0.2s;
+}
+
+.btn-back {
+  background-color: #f3f4f6;
+  color: #1f2937;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-back:hover {
+  background-color: #e5e7eb;
+}
+
+.btn-reserve {
+  background-color: #2563eb;
+  color: white;
+}
+
+.btn-reserve:hover {
+  background-color: #1d4ed8;
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+  .event-detail-card {
+    flex-direction: row;
+  }
+
+  .event-detail-img {
+    width: 50%;
+    height: auto;
+  }
+
+  .event-detail-info {
+    width: 50%;
+  }
+}
+.reservar-layout {
+  display: flex;
+  justify-content: center;
+  padding: 50px 20px;
+}
+
+.reservar-content {
+  max-width: 600px;
+  width: 100%;
+}
+
+.reservar-card {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.reservar-img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.form-group input {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.btn-reservar {
+  padding: 12px;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+  transition: 0.2s;
+}
+
+.btn-reservar:hover {
+  background-color: #1d4ed8;
+}
+
+@media (max-width: 768px) {
+  .reservar-layout {
+    padding: 30px 10px;
+  }
+
+  .reservar-img {
+    height: 200px;
+  }
+}
