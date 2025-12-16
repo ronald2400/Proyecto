@@ -7,12 +7,26 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 function UserEventCard({ evento }) {
+
+  const getImagenEvento = () => {
+    if (!evento?.imagen) {
+      return eventoDefaultImg;
+    }
+
+    if (evento.imagen.startsWith("http")) {
+      return evento.imagen;
+    }
+
+    return `http://127.0.0.1:8000/media/${evento.imagen}`;
+  };
+
   return (
     <div className="user-event-card">
       <img
-        src={eventoDefaultImg}
+        src={getImagenEvento()}
         alt={evento.nombre}
         className="user-event-img"
+        onError={(e) => (e.target.src = eventoDefaultImg)}
       />
       <h3>{evento.nombre}</h3>
       <Link to={`/usuario/evento/${evento.id}`}>
@@ -24,8 +38,8 @@ function UserEventCard({ evento }) {
  
 function Usuario() {
   const [usuario, setUsuario] = useState({
-      nombre: "Cargando...",
-      email: ""
+    nombre: "Cargando...",
+    email: ""
   });
   const [eventosActivos, setEventosActivos] = useState([]);
   const navigate = useNavigate();
@@ -35,45 +49,47 @@ function Usuario() {
     const userId = localStorage.getItem("user_id");
 
     if (!token) {
-        alert("Debes iniciar sesión para ver esta página.");
-        navigate("/login");
-        return;
+      alert("Debes iniciar sesión para ver esta página.");
+      navigate("/login");
+      return;
     }
 
-
     if (userId) {
-        fetch(`http://127.0.0.1:8000/api/usuarios/${userId}/`, {
-            headers: { "Authorization": `Token ${token}` }
-        })
+      fetch(`http://127.0.0.1:8000/api/usuarios/${userId}/`, {
+        headers: { Authorization: `Token ${token}` }
+      })
         .then(res => res.json())
         .then(data => {
-            const nombreMostrar = data.nombre ? `${data.nombre} ${data.apellido || ''}` : data.email;
-            setUsuario({
-                nombre: nombreMostrar,
-                email: data.email
-            });
+          const nombreMostrar = data.nombre
+            ? `${data.nombre} ${data.apellido || ""}`
+            : data.email;
+
+          setUsuario({
+            nombre: nombreMostrar,
+            email: data.email
+          });
         })
         .catch(err => {
-            console.error("Error cargando usuario:", err);
-            setUsuario({
-                nombre: localStorage.getItem("user_email") || "Usuario",
-                email: localStorage.getItem("user_email")
-            });
+          console.error("Error cargando usuario:", err);
+          setUsuario({
+            nombre: localStorage.getItem("user_email") || "Usuario",
+            email: localStorage.getItem("user_email")
+          });
         });
     }
 
     fetch("http://127.0.0.1:8000/api/eventos/")
-      .then((response) => response.json())
-      .then((data) => {
+      .then(response => response.json())
+      .then(data => {
         setEventosActivos(data);
       })
-      .catch((error) => console.error("Error eventos:", error));
+      .catch(error => console.error("Error eventos:", error));
 
   }, [navigate]);
 
   const handleLogout = () => {
-      localStorage.clear();
-      navigate("/login");
+    localStorage.clear();
+    navigate("/login");
   };
 
   return (
@@ -96,31 +112,30 @@ function Usuario() {
 
           <div className="user-logout">
             <span
-                onClick={handleLogout}
-                style={{
-                    cursor: "pointer",
-                    color: "inherit",
-                    display: "block",  
-                    width: "100%",      
-                }}
+              onClick={handleLogout}
+              style={{
+                cursor: "pointer",
+                color: "inherit",
+                display: "block",
+                width: "100%",
+              }}
             >
-                Cerrar sesión
+              Cerrar sesión
             </span>
           </div>
         </aside>
 
         <main className="user-content">
-       
           <h1>Hola, {usuario.nombre}!</h1>
           <h2>Eventos activos</h2>
 
           <section className="user-events-container">
             {eventosActivos.length > 0 ? (
-                eventosActivos.map(evento => (
-                  <UserEventCard key={evento.id} evento={evento} />
-                ))
+              eventosActivos.map(evento => (
+                <UserEventCard key={evento.id} evento={evento} />
+              ))
             ) : (
-                <p>Cargando eventos...</p>
+              <p>Cargando eventos...</p>
             )}
           </section>
         </main>

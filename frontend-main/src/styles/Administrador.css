@@ -674,3 +674,13 @@ body.dark .form-group input:focus,
 body.dark .form-group textarea:focus {
   border-color: #888;
 }
+
+.form-evento .form-group textarea {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  resize: vertical;     
+  min-height: 100px;      
+  max-height: 300px;    
+  overflow: auto;         
+}

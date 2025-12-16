@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+import uuid
 
 # Modelo de Usuario
 class Usuario(AbstractUser):
@@ -34,6 +35,7 @@ class Evento(models.Model):
     capacidad = models.IntegerField() # Aforo total
     ubicacion = models.CharField(max_length=200)
     estado = models.CharField(max_length=20, choices=ESTADOS, default='activo')
+    imagen = models.ImageField(upload_to='eventos/', null=True, blank=True)
 
     def __str__(self):
         return self.nombre
@@ -50,7 +52,7 @@ class Reserva(models.Model):
     cantidad_plazas = models.IntegerField(default=1)
     estado_reserva = models.CharField(max_length=20, choices=ESTADOS, default='confirmada')
     fecha_reserva = models.DateTimeField(auto_now_add=True)
-    codigo_reserva = models.CharField(max_length=50, unique=True) # Generado por UUID en la vista
+    codigo_reserva = models.CharField(max_length=50, unique=True) # Generado por UUID en la vista o en save()
     
     # Datos para Invitados
     nombre_contacto = models.CharField(max_length=100, null=True, blank=True)
@@ -59,3 +61,10 @@ class Reserva(models.Model):
 
     def __str__(self):
         return f"Reserva {self.codigo_reserva}"
+
+    def save(self, *args, **kwargs):
+        # Si no tiene codigo, generamos uno aquí como última línea de defensa
+        if not self.codigo_reserva:
+            # Generador simple; si se necesita mayor robustez, manejar colisiones en bucle
+            self.codigo_reserva = "RES-" + uuid.uuid4().hex[:8].upper()
+        super().save(*args, **kwargs)

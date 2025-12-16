@@ -28,6 +28,7 @@ import CrearEvento from "./pages/CrearEvento";
 import GestionReservasAdmin from "./pages/GestionReservasAdmin";
 import VerReservaAdmin from "./pages/VerReservaAdmin";
 import ReportesAdmin from "./pages/ReportesAdmin";
+import GestionUsuarios from "./pages/GestionUsuarios";
 
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -59,6 +60,7 @@ function App() {
         
         {/* Administrador */}
         <Route path="/admin" element={<Administrador />} />
+        <Route path="/admin/usuarios" element={<GestionUsuarios />} />
         <Route path="/admin/eventos" element={<GestionEventos />} />
         <Route path="/admin/eventos/crear" element={<CrearEvento />} />
         <Route path="/admin/eventos/:id" element={<VerEventoAdmin />} />

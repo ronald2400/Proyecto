@@ -154,3 +154,6 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication', # ver la API en el navegador
     )
 }
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'

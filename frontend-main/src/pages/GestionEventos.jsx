@@ -77,6 +77,7 @@ function GestionEventos() {
 
           <nav className="admin-menu">
             <Link to="/admin">🏠 Inicio</Link>
+            <Link to="/admin/usuarios">👥 Gestión de usuarios</Link>           
             <Link to="/admin/eventos" className="active">📅 Gestión de eventos</Link>
             <Link to="/admin/reservas">📋 Gestión de reservas</Link>
             <Link to="/admin/reportes">📊 Reportes</Link>

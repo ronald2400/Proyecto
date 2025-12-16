@@ -20,7 +20,6 @@ function ReservasNr() {
   const [error, setError] = useState("");
   const [exito, setExito] = useState(null);
 
-
   useEffect(() => {
     if (!eventoSeleccionado) {
         fetch("http://127.0.0.1:8000/api/eventos/")
@@ -33,6 +32,11 @@ function ReservasNr() {
     }
   }, [eventoSeleccionado]);
 
+  function isValidEmail(email) {
+    if (!email) return false;
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -42,22 +46,34 @@ function ReservasNr() {
         return;
     }
 
-    if (cantidad > eventoSeleccionado.cupos_disponibles) {
+    const cantidadInt = parseInt(cantidad, 10) || 1;
+    if (cantidadInt > eventoSeleccionado.cupos_disponibles) {
         setError(`Solo quedan ${eventoSeleccionado.cupos_disponibles} cupos.`);
         return;
     }
 
+    const emailToSend = email.trim().toLowerCase();
+    if (!isValidEmail(emailToSend)) {
+      setError("Introduce un correo electrónico válido (ej: usuario@dominio.com).");
+      return;
+    }
+
+    // Construimos el body dinámicamente para no enviar rut si está vacío
+    const body = {
+      evento: eventoSeleccionado.id,
+      cantidad_plazas: cantidadInt,
+      nombre_contacto: nombre.trim(),
+      email_contacto: emailToSend
+    };
+    const rutTrim = rut.trim();
+    if (rutTrim !== "") {
+      body.rut_contacto = rutTrim;
+    }
     try {
         const res = await fetch("http://127.0.0.1:8000/api/reservas/", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                evento: eventoSeleccionado.id,
-                cantidad_plazas: parseInt(cantidad),
-                nombre_contacto: nombre,
-                email_contacto: email,
-                rut_contacto: rut 
-            })
+            body: JSON.stringify(body)
         });
 
         const data = await res.json();
@@ -68,11 +84,16 @@ function ReservasNr() {
             setEmail("");
             setRut("");
         } else {
-            setError(data.error || "Error al procesar la reserva.");
+            console.log("Error backend:", data);
+            setError(
+                typeof data === "string"
+                ? data
+                : Object.values(data).flat().join(" | ")
+            );
         }
 
     } catch (err) {
-        console.error(err);
+        console.error("Fetch error detalle:", err);
         setError("Error de conexión.");
     }
   };
@@ -104,7 +125,6 @@ function ReservasNr() {
             ) : (
                 <form onSubmit={handleSubmit} style={{display: "flex", flexDirection: "column", gap: "15px"}}>
                     
-         
                     <div>
                         <label style={{fontWeight: "bold"}}>Evento:</label>
                         {eventoInicial ? (
@@ -134,7 +154,6 @@ function ReservasNr() {
                         )}
                     </div>
 
-     
                     <div>
                         <label>Nombre Completo:</label>
                         <input 

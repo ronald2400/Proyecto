@@ -10,6 +10,7 @@ export default function ReservarEvento() {
   const navigate = useNavigate();
   const [evento, setEvento] = useState(null);
   const [usuarioNombre, setUsuarioNombre] = useState("Usuario");
+  const [usuarioEmail, setUsuarioEmail] = useState("");
   const [personas, setPersonas] = useState(1); 
   const [error, setError] = useState("");
 
@@ -19,7 +20,18 @@ export default function ReservarEvento() {
         navigate("/login");
         return;
     }
-    setUsuarioNombre(localStorage.getItem("user_email") || "Usuario");
+
+    // Leer nombre y email guardados en localStorage (asegúrate de guardarlos en el login)
+    const storedName = localStorage.getItem("user_name");
+    const storedEmail = localStorage.getItem("user_email");
+    if (storedName && storedName.trim().length > 0) {
+      setUsuarioNombre(storedName);
+    } else if (storedEmail) {
+      // fallback: parte local del email
+      setUsuarioNombre(storedEmail.split("@")[0]);
+    }
+
+    if (storedEmail) setUsuarioEmail(storedEmail);
 
     fetch(`http://127.0.0.1:8000/api/eventos/${id}/`)
       .then((res) => {
@@ -58,6 +70,11 @@ export default function ReservarEvento() {
 
     try {
         const token = localStorage.getItem("token");
+
+        // Leer datos de contacto que vamos a enviar
+        const nombreContacto = localStorage.getItem("user_name") || usuarioNombre || "";
+        const emailContacto = localStorage.getItem("user_email") || usuarioEmail || "";
+
         const res = await fetch("http://127.0.0.1:8000/api/reservas/", {
             method: "POST",
             headers: {
@@ -66,7 +83,11 @@ export default function ReservarEvento() {
             },
             body: JSON.stringify({
                 evento: evento.id,
-                cantidad_plazas: personas
+                cantidad_plazas: personas,
+                // campos adicionales para que la reserva guarde nombre/email de contacto
+                nombre_contacto: nombreContacto,
+                email_contacto: emailContacto
+                // puedes añadir telefono_contacto aquí si lo tienes
             })
         });
 

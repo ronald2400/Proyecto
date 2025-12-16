@@ -84,6 +84,7 @@ function Administrador() {
 
           <nav className="admin-menu">
             <Link to="/admin" className="active">🏠 Inicio</Link>
+            <Link to="/admin/usuarios">👥 Gestión de usuarios</Link>
             <Link to="/admin/eventos">📅 Gestión de eventos</Link>
             <Link to="/admin/reservas">📋 Gestión de reservas</Link>
             <Link to="/admin/reportes">📊 Reportes</Link>

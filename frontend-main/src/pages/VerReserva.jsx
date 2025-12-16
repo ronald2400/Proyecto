@@ -34,10 +34,19 @@ export default function VerReserva() {
       })
       .then(data => {
           setReserva(data);
- 
-          return fetch(`http://127.0.0.1:8000/api/eventos/${data.evento}/`);
+
+          // data.evento puede ser objeto o id; resolver la id correctamente
+          const eventoId = (typeof data.evento === "object" && data.evento !== null) ? data.evento.id : data.evento;
+          if (!eventoId) throw new Error("ID del evento no disponible");
+
+          // Usar token si está disponible (aunque el endpoint evento suele ser publico)
+          const headers = token ? { "Authorization": `Token ${token}` } : {};
+          return fetch(`http://127.0.0.1:8000/api/eventos/${eventoId}/`, { headers });
       })
-      .then(res => res.json())
+      .then(res => {
+          if (!res.ok) throw new Error("Evento no encontrado");
+          return res.json();
+      })
       .then(eventoData => setEventoInfo(eventoData))
       .catch(err => {
           console.error(err);
@@ -45,7 +54,6 @@ export default function VerReserva() {
           navigate("/usuario/mis-reservas");
       });
   }, [id, navigate]);
-
 
   const handleCancelar = async () => {
     if (!window.confirm("¿Estás seguro de que deseas cancelar esta reserva?")) return;
@@ -74,6 +82,40 @@ export default function VerReserva() {
       localStorage.clear();
       navigate("/login");
   };
+
+  // Robust date parsing: intenta varios formatos y evita "Invalid Date"
+  function parseToDate(value) {
+    if (!value) return null;
+    if (value instanceof Date) return value;
+
+    // Si viene como objeto con campo fecha (por seguridad)
+    if (typeof value === "object" && value !== null) {
+      if (value.fecha_inicio) value = value.fecha_inicio;
+      else if (value.fecha_reserva) value = value.fecha_reserva;
+    }
+
+    // Intento directo
+    let d = new Date(value);
+    if (!isNaN(d)) return d;
+
+    // Reemplaza primer espacio por 'T' (p. ej. "YYYY-MM-DD HH:MM:SS")
+    const s1 = String(value).replace(" ", "T");
+    d = new Date(s1);
+    if (!isNaN(d)) return d;
+
+    // Añade 'Z' para forzar UTC
+    const s2 = s1 + "Z";
+    d = new Date(s2);
+    if (!isNaN(d)) return d;
+
+    return null;
+  }
+
+  function formatDateTime(value) {
+    const d = parseToDate(value);
+    if (!d) return "N/A";
+    return `${d.toLocaleDateString()} ${d.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}`;
+  }
 
   if (!reserva || !eventoInfo) return <div style={{textAlign: "center", marginTop: "50px"}}>Cargando detalles...</div>;
 
@@ -121,7 +163,7 @@ export default function VerReserva() {
             <div className="mb-2 flex items-center gap-2">
               <CalendarIcon /> 
               <span>
-                  {new Date(eventoInfo.fecha_inicio).toLocaleDateString()} - {new Date(eventoInfo.fecha_inicio).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
+                  {formatDateTime(eventoInfo.fecha_inicio)}
               </span>
             </div>
 
@@ -129,7 +171,7 @@ export default function VerReserva() {
             <p className="mb-2">👥 Personas: {reserva.cantidad_plazas}</p>
             
             <p className="mb-4 font-medium" style={{color: reserva.estado_reserva === 'cancelada' ? 'red' : 'green'}}>
-                Estado: {reserva.estado_reserva.toUpperCase()}
+                Estado: {String(reserva.estado_reserva).toUpperCase()}
             </p>
 
             <div className="flex gap-2">

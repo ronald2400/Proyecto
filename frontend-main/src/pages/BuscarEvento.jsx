@@ -18,27 +18,25 @@ function BuscarEvento() {
     const userId = localStorage.getItem("user_id");
 
     if (!token) {
-        navigate("/login");
-        return;
+      navigate("/login");
+      return;
     }
 
     if (userId) {
-        fetch(`http://127.0.0.1:8000/api/usuarios/${userId}/`, {
-            headers: { "Authorization": `Token ${token}` }
-        })
+      fetch(`http://127.0.0.1:8000/api/usuarios/${userId}/`, {
+        headers: { Authorization: `Token ${token}` }
+      })
         .then(res => res.json())
         .then(data => {
-            // Guardamos el email en lugar del nombre
-            setUsuario({ email: data.email || "Usuario" });
+          setUsuario({ email: data.email || "Usuario" });
         })
         .catch(err => {
-            console.error("Error cargando usuario:", err);
-            setUsuario({ email: localStorage.getItem("user_email") || "Usuario" });
+          console.error("Error cargando usuario:", err);
+          setUsuario({ email: localStorage.getItem("user_email") || "Usuario" });
         });
     } else {
-        setUsuario({ email: localStorage.getItem("user_email") || "Usuario" });
+      setUsuario({ email: localStorage.getItem("user_email") || "Usuario" });
     }
-
   }, [navigate]);
 
   const buscarEventos = useCallback(() => {
@@ -47,21 +45,34 @@ function BuscarEvento() {
     if (fecha) url += `fecha=${fecha}&`;
 
     fetch(url)
-      .then((response) => response.json())
-      .then((data) => setEventos(data))
-      .catch((error) => console.error("Error al buscar:", error));
+      .then(response => response.json())
+      .then(data => setEventos(data))
+      .catch(error => console.error("Error al buscar:", error));
   }, [search, fecha]);
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-        buscarEventos();
-    }, 500);    
+      buscarEventos();
+    }, 500);
+
     return () => clearTimeout(timeoutId);
-  }, [buscarEventos]); 
+  }, [buscarEventos]);
 
   const handleLogout = () => {
-      localStorage.clear();
-      navigate("/login");
+    localStorage.clear();
+    navigate("/login");
+  };
+
+  const getImagenEvento = (evento) => {
+    if (!evento?.imagen) {
+      return eventoDefaultImg;
+    }
+
+    if (evento.imagen.startsWith("http")) {
+      return evento.imagen;
+    }
+
+    return `http://127.0.0.1:8000/media/${evento.imagen}`;
   };
 
   return (
@@ -77,22 +88,24 @@ function BuscarEvento() {
 
           <nav className="user-menu">
             <Link to="/usuario">🏠 Inicio</Link>
-            <Link to="/usuario/buscar-evento" className="active">🔍 Buscar evento</Link>
+            <Link to="/usuario/buscar-evento" className="active">
+              🔍 Buscar evento
+            </Link>
             <Link to="/usuario/mis-reservas">📅 Mis reservas</Link>
             <Link to="/usuario/historial">📜 Historial</Link>
           </nav>
 
           <div className="user-logout">
             <span
-                onClick={handleLogout}
-                style={{
-                    cursor: "pointer",
-                    color: "inherit",
-                    display: "block",  
-                    width: "100%",      
-                }}
+              onClick={handleLogout}
+              style={{
+                cursor: "pointer",
+                color: "inherit",
+                display: "block",
+                width: "100%",
+              }}
             >
-                Cerrar sesión
+              Cerrar sesión
             </span>
           </div>
         </aside>
@@ -101,7 +114,7 @@ function BuscarEvento() {
           <h1>Búsqueda de eventos</h1>
 
           <div className="search-container">
-            <input 
+            <input
               type="text"
               placeholder="Buscar evento (Nombre o Ubicación)"
               className="search-input"
@@ -119,16 +132,17 @@ function BuscarEvento() {
 
           <section className="user-events-container">
             {eventos.length > 0 ? (
-              eventos.map((ev) => (
+              eventos.map(ev => (
                 <div key={ev.id} className="user-event-card">
                   <img
-                    src={eventoDefaultImg}
+                    src={getImagenEvento(ev)}
                     alt={ev.nombre}
                     className="user-event-img"
+                    onError={(e) => (e.target.src = eventoDefaultImg)}
                   />
                   <h3>{ev.nombre}</h3>
                   <p>{new Date(ev.fecha_inicio).toLocaleDateString()}</p>
-                  
+
                   <Link to={`/usuario/evento/${ev.id}`}>
                     <button className="admin-btn">Ver detalles</button>
                   </Link>

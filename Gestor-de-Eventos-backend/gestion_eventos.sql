@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-12-2025 a las 02:36:08
+-- Tiempo de generación: 16-12-2025 a las 14:26:54
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -40,9 +40,13 @@ CREATE TABLE `authtoken_token` (
 INSERT INTO `authtoken_token` (`key`, `created`, `user_id`) VALUES
 ('2768b136a0f91dbc5aed284fc04c2f785d97e65d', '2025-12-02 00:30:50.626881', 3),
 ('4ca9a5d45c3634a121700f359a6de8423978afeb', '2025-12-02 01:10:08.867016', 4),
+('5871b800e3471cfeb66fc5b19ab071134cb61e42', '2025-12-04 22:45:44.128831', 8),
 ('5b467a39cf2bfe5052c071f003d7f6bd23f66124', '2025-12-02 00:13:52.424884', 1),
+('6f0c34a05830bd0d77803501fed26878d0b57429', '2025-12-16 13:21:52.821715', 11),
 ('887be67b3ec7119197a2bbfe0f08185bb4bad961', '2025-12-02 01:13:10.127600', 5),
-('de8609f98195a8cfe851875e65e90d35b2590515', '2025-12-02 01:13:53.853060', 6);
+('d96eb05029111e09450a206ad69f734d1e04e19c', '2025-12-05 05:58:25.457343', 9),
+('de8609f98195a8cfe851875e65e90d35b2590515', '2025-12-02 01:13:53.853060', 6),
+('e7cd3fdc46e9648b92171c2e4ce1ca334e140da7', '2025-12-16 12:55:45.135009', 10);
 
 -- --------------------------------------------------------
 
@@ -140,29 +144,27 @@ CREATE TABLE `core_evento` (
   `fecha_fin` datetime(6) NOT NULL,
   `capacidad` int(11) NOT NULL,
   `ubicacion` varchar(200) NOT NULL,
-  `estado` varchar(20) NOT NULL
+  `estado` varchar(20) NOT NULL,
+  `imagen` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `core_evento`
 --
 
-INSERT INTO `core_evento` (`id`, `nombre`, `descripcion`, `fecha_inicio`, `fecha_fin`, `capacidad`, `ubicacion`, `estado`) VALUES
-(1, 'Taller', 'Taller de prueba', '2025-12-01 23:09:38.000000', '2025-12-05 23:09:50.000000', 15, 'Sala 001', 'activo'),
-(2, 'Charla', 'Charla de prueba', '2025-12-01 23:10:27.000000', '2025-12-05 23:10:28.000000', 20, 'Sala 009', 'activo'),
-(3, 'Lanzamiento Nueva Colección', 'Presentación exclusiva de productos de temporada para clientes VIP.', '2025-12-10 19:00:00.000000', '2025-12-10 22:00:00.000000', 80, 'Showroom Principal', 'activo'),
-(4, 'Cena de Aniversario', 'Celebración de los 10 años de la empresa con todo el personal.', '2025-12-19 20:00:00.000000', '2025-12-20 02:00:00.000000', 150, 'Centro de Eventos El Parque', 'activo'),
-(5, 'Capacitación: Excel Intermedio', 'Curso práctico para el área administrativa y ventas.', '2026-01-08 09:00:00.000000', '2026-01-08 13:00:00.000000', 20, 'Sala de Reuniones A', 'activo'),
-(6, 'Desayuno de Networking', 'Encuentro con proveedores y socios estratégicos locales.', '2025-12-15 08:30:00.000000', '2025-12-15 11:00:00.000000', 40, 'Cafetería Central', 'activo'),
-(7, 'Taller de Liderazgo', 'Mejorando las habilidades blandas para jefaturas.', '2026-01-12 15:00:00.000000', '2026-01-12 18:00:00.000000', 15, 'Sala de Directorio', 'activo'),
-(8, 'Gran Venta de Bodega', 'Apertura especial al público con descuentos de liquidación.', '2025-12-28 10:00:00.000000', '2025-12-28 18:00:00.000000', 300, 'Bodega Central', 'activo'),
-(9, 'Charla: Atención al Cliente', 'Cómo mejorar la experiencia de compra y fidelizar.', '2026-02-05 10:00:00.000000', '2026-02-05 12:00:00.000000', 50, 'Auditorio Pyme', 'activo'),
-(10, 'Jornada de Planificación 2026', 'Definición de objetivos estratégicos para el próximo año.', '2026-01-03 09:00:00.000000', '2026-01-03 18:00:00.000000', 10, 'Sala de Gerencia', 'activo'),
-(11, 'After Office de Fin de Mes', 'Instancia recreativa para integración de equipos.', '2025-12-27 18:30:00.000000', '2025-12-27 21:00:00.000000', 60, 'Terraza del Edificio', 'activo'),
-(12, 'Seminario: Marketing Digital', 'Estrategias básicas para redes sociales en PYMES.', '2026-01-20 16:00:00.000000', '2026-01-20 19:00:00.000000', 40, 'Sala de Capacitación B', 'activo'),
-(13, 'Feria de Emprendedores', 'Espacio para mostrar productos locales a la comunidad.', '2026-02-14 11:00:00.000000', '2026-02-14 20:00:00.000000', 500, 'Plaza Mayor', 'activo'),
-(14, 'Inducción Nuevos Ingresos', 'Bienvenida y capacitación para el personal contratado.', '2026-03-02 09:00:00.000000', '2026-03-02 11:00:00.000000', 10, 'Sala RRHH', 'activo'),
-(15, 'Charla: Gestión Tributaria', 'Actualización sobre nuevas normativas de impuestos.', '2026-01-15 10:00:00.000000', '2026-01-15 12:00:00.000000', 30, 'Sala de Reuniones A', 'cancelado');
+INSERT INTO `core_evento` (`id`, `nombre`, `descripcion`, `fecha_inicio`, `fecha_fin`, `capacidad`, `ubicacion`, `estado`, `imagen`) VALUES
+(22, 'Conferencia de Innovación', 'Presentación de nuevas tecnologías y tendencias en la industria.', '2026-01-01 12:00:00.000000', '2026-01-10 21:00:00.000000', 150, 'Sala 005', 'activo', 'eventos/concepto-innovacion-dibujado-mano-cohete-volador_23-2149161408.avif'),
+(23, 'Taller de Inteligencia Artificial', 'Capacitación práctica en IA aplicada a negocios.', '2026-01-02 11:00:00.000000', '2026-01-11 21:30:00.000000', 50, 'Sala 012', 'activo', 'eventos/ia.jpg'),
+(24, 'Seminario de Seguridad Informática', 'Estrategias para proteger sistemas y datos corporativos.', '2026-01-09 13:51:00.000000', '2026-01-15 21:52:00.000000', 80, 'Sala 020', 'activo', 'eventos/importancia-de-la-seguridad-informática.jpg.webp'),
+(25, 'Congreso de Energías Renovables', 'Discusión sobre proyectos y avances en energías limpias.', '2025-12-22 13:00:00.000000', '2026-01-01 00:00:00.000000', 199, 'Sala 033', 'activo', 'eventos/energias-renovables.jpg'),
+(26, 'Expo Emprendedores', 'Exhibición de startups y oportunidades de inversión.', '2025-12-25 13:00:00.000000', '2025-12-31 23:00:00.000000', 300, 'Sala 045', 'activo', 'eventos/ChatGPT_Image_Dec_16_2025_09_23_57_AM.png'),
+(27, 'Curso de Programación Avanzada', 'Taller de codificación y desarrollo de software.', '2025-12-26 13:00:00.000000', '2025-12-31 21:30:00.000000', 38, 'Sala 050', 'activo', 'eventos/programa.jpg'),
+(28, 'Foro de Marketing Digital', 'Técnicas y estrategias para mejorar la presencia online.', '2026-01-15 12:30:00.000000', '2026-01-30 21:00:00.000000', 119, 'Sala 060', 'activo', 'eventos/marketing.png'),
+(29, 'Jornada de Robótica Educativa', 'Actividades y demostraciones de robótica para estudiantes.', '2026-01-01 12:30:00.000000', '2026-02-02 21:30:00.000000', 80, 'Sala 072', 'activo', 'eventos/robot.jpg'),
+(30, 'Conferencia de Salud Mental', 'Estrategias y técnicas de bienestar psicológico.', '2026-01-10 12:00:00.000000', '2026-01-30 21:30:00.000000', 100, 'Sala 081', 'activo', 'eventos/salud.jpg'),
+(31, 'Taller de Fotografía Profesional', 'Capacitación en técnicas avanzadas de fotografía.', '2026-02-02 12:30:00.000000', '2026-02-13 21:30:00.000000', 30, 'Sala 090', 'activo', 'eventos/foto.png'),
+(32, 'Expo Cultural', 'Exhibición de arte, música y tradiciones locales.', '2025-12-23 13:30:00.000000', '2025-12-30 21:30:00.000000', 250, 'Sala 008', 'activo', 'eventos/expo_cultural.png'),
+(33, 'Festival de Cine Independiente', 'Proyección de películas de cine independiente y debates.', '2025-12-24 11:00:00.000000', '2026-01-07 21:00:00.000000', 220, 'Sala 035', 'activo', 'eventos/cine.jpg');
 
 -- --------------------------------------------------------
 
@@ -172,29 +174,29 @@ INSERT INTO `core_evento` (`id`, `nombre`, `descripcion`, `fecha_inicio`, `fecha
 
 CREATE TABLE `core_reserva` (
   `id` bigint(20) NOT NULL,
-  `cantidad_plazas` int(11) NOT NULL,
+  `cantidad_plazas` int(10) UNSIGNED NOT NULL,
   `estado_reserva` varchar(20) NOT NULL,
   `fecha_reserva` datetime(6) NOT NULL,
-  `codigo_reserva` varchar(50) NOT NULL,
+  `codigo_reserva` varchar(20) NOT NULL,
   `nombre_contacto` varchar(100) DEFAULT NULL,
-  `email_contacto` varchar(254) DEFAULT NULL,
+  `email_contacto` varchar(254) DEFAULT '',
   `rut_contacto` varchar(12) DEFAULT NULL,
   `evento_id` bigint(20) NOT NULL,
   `usuario_id` bigint(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ;
 
 --
 -- Volcado de datos para la tabla `core_reserva`
 --
 
 INSERT INTO `core_reserva` (`id`, `cantidad_plazas`, `estado_reserva`, `fecha_reserva`, `codigo_reserva`, `nombre_contacto`, `email_contacto`, `rut_contacto`, `evento_id`, `usuario_id`) VALUES
-(1, 2, 'confirmada', '2025-12-02 01:26:26.754768', 'RES-58BCFA24', NULL, NULL, NULL, 4, 4),
-(2, 1, 'confirmada', '2025-12-02 01:26:43.939006', 'RES-F862EA6B', NULL, NULL, NULL, 5, 4),
-(3, 5, 'confirmada', '2025-12-02 01:27:12.292880', 'RES-8C5B55AE', 'Empresa Partner', 'contacto@partner.cl', '76.111.222-3', 4, NULL),
-(4, 3, 'confirmada', '2025-12-02 01:27:21.830702', 'RES-2F76C677', 'Consultora Externa', 'rrhh@externos.cl', NULL, 5, NULL),
-(5, 16, 'confirmada', '2025-12-02 01:27:41.778416', 'RES-B4AA432E', 'Grupo Masivo', 'masivo@test.com', NULL, 5, NULL),
-(6, 40, 'confirmada', '2025-12-02 01:29:31.038478', 'RES-1138B347', 'Invitados', 'invt@test.com', NULL, 8, NULL),
-(7, 10, 'cancelada', '2025-12-02 01:30:17.060401', 'RES-1EFF3E45', NULL, NULL, NULL, 8, 5);
+(105, 3, 'confirmada', '2025-12-16 12:56:05.146001', 'RES-2973D59C', NULL, NULL, NULL, 27, 10),
+(106, 20, 'confirmada', '2025-12-16 12:56:19.572602', 'RES-04000209', NULL, NULL, NULL, 33, 10),
+(107, 15, 'confirmada', '2025-12-16 13:14:41.491763', 'RES-D1C6445D', 'Juan', 'juan@test.cl', NULL, 32, NULL),
+(108, 30, 'confirmada', '2025-12-16 13:18:15.603660', 'RES-EC88E5DC', 'ronald', 'ronald@test.cl', NULL, 26, 8),
+(109, 10, 'confirmada', '2025-12-16 13:19:54.045283', 'RES-74A72C4F', 'ronald.rebolledo03', 'ronald.rebolledo03@inacapmail.cl', NULL, 30, 10),
+(110, 25, 'confirmada', '2025-12-16 13:22:00.729931', 'RES-D6C15D0F', 'daniel', 'daniel@test.cl', NULL, 23, 11),
+(111, 9, 'confirmada', '2025-12-16 13:23:11.934993', 'RES-B51AF79B', 'Katherine Abigail', 'katherine@test.cl', '25.789.456-k', 28, NULL);
 
 -- --------------------------------------------------------
 
@@ -225,12 +227,16 @@ CREATE TABLE `core_usuario` (
 --
 
 INSERT INTO `core_usuario` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `is_staff`, `is_active`, `date_joined`, `email`, `rol`, `estado`, `apellido`, `nombre`) VALUES
-(1, 'pbkdf2_sha256$600000$D15tP6uQzaIFFwKzJ0iQqn$mLYx2nKA1EUS4ijamr2BVMU9wM71VBTzQV/K98ZQjcU=', '2025-12-02 00:25:12.962476', 1, 'admin@test.com', '', '', 1, 1, '2025-12-01 23:07:14.000000', 'admin@test.com', 'admin', 'activo', 'administrador', 'usuario'),
+(1, 'pbkdf2_sha256$600000$D15tP6uQzaIFFwKzJ0iQqn$mLYx2nKA1EUS4ijamr2BVMU9wM71VBTzQV/K98ZQjcU=', '2025-12-16 13:23:27.303606', 1, 'admin@test.com', '', '', 1, 1, '2025-12-01 23:07:14.000000', 'admin@test.com', 'admin', 'activo', 'administrador', 'usuario'),
 (3, 'pbkdf2_sha256$600000$wklXPjVL93BynhUnSutSHU$AdXKmFwKOupHgvdyyqi6IEbZBRfRL05KMPnuwqgZyYU=', '2025-12-02 00:56:28.709926', 0, 'cristhian@test.com', '', '', 0, 1, '2025-12-01 23:17:34.000000', 'cristhian@test.com', 'cliente', 'activo', 'test', 'usuario'),
 (4, 'pbkdf2_sha256$600000$WU7E39hKlWTMkZA1ZrnbJC$OmPNloM9Np45p274QMuc/uQJSpibxbg6RByEaKg00+I=', '2025-12-02 01:21:38.850836', 0, 'juan.perez@test.com', '', '', 0, 1, '2025-12-02 00:17:11.305710', 'juan.perez@test.com', 'cliente', 'activo', 'Perez', 'Juan'),
 (5, 'pbkdf2_sha256$600000$vtnMPbZlWmLufjoZM42tzG$nKqiiux8RbkHCqPkTRRmWYXWveonNKXbwsXT4lvqKq0=', '2025-12-02 01:13:10.123490', 0, 'maria.gonzalez@test.com', '', '', 0, 1, '2025-12-02 00:17:39.677325', 'maria.gonzalez@test.com', 'cliente', 'activo', 'Gonzalez', 'Maria'),
 (6, 'pbkdf2_sha256$600000$LyRq4AHEc8bcvlu4Bombij$pwqvRlYVPtvtiQMkVJRbPSb9YAjTos6M34TWM+8Rd7o=', '2025-12-02 01:13:53.848489', 0, 'roberto.mendez@tes.com', '', '', 0, 1, '2025-12-02 00:18:21.291044', 'roberto.mendez@test.com', 'admin', 'activo', 'Mendez', 'Roberto'),
-(7, 'pbkdf2_sha256$600000$dzLi3Ez4ffnRvjS591mwPA$foLAv0u4Z2xmkA9EW2HXx+vkGh6KsB4KLkpo/lik7dU=', NULL, 0, 'john.doe@test.com', '', '', 0, 1, '2025-12-02 00:18:34.954422', 'john.doe@test.com', 'cliente', 'activo', 'Doe', 'John');
+(7, 'pbkdf2_sha256$600000$dzLi3Ez4ffnRvjS591mwPA$foLAv0u4Z2xmkA9EW2HXx+vkGh6KsB4KLkpo/lik7dU=', NULL, 0, 'john.doe@test.com', '', '', 0, 1, '2025-12-02 00:18:34.954422', 'john.doe@test.com', 'cliente', 'activo', 'Doe', 'John'),
+(8, 'pbkdf2_sha256$600000$NXN9YFqlSqT25Fn825uSe4$6M/tj6BuAVt1oN3NU92kL1PktXBZZbN+lm1QugfvRQI=', '2025-12-16 13:16:05.547218', 0, 'ronald@test.cl', '', '', 0, 1, '2025-12-04 22:44:21.387622', 'ronald@test.cl', 'cliente', 'activo', 'Rebolledo', 'Ronald'),
+(9, 'pbkdf2_sha256$600000$2bXa7Sbwkd2YRxMovJy0SD$zSHv9r9laNHuwbsk/vY58niCU6JblKyIT/efvkeyiUc=', '2025-12-05 05:58:25.451991', 0, 'ron@test.cl', '', '', 0, 1, '2025-12-05 05:58:06.977694', 'ron@test.cl', 'cliente', 'activo', 'cuevas', 'daniel'),
+(10, 'pbkdf2_sha256$600000$dAjFTYEIsswlRnPDUQihbm$WZDzXgPrM6CO7U8zVieSerdyeDJv+1gA0RTSwy06IIs=', '2025-12-16 13:19:38.287368', 0, 'ronald.rebolledo03@inacapmail.cl', '', '', 0, 1, '2025-12-16 12:55:30.115756', 'ronald.rebolledo03@inacapmail.cl', 'cliente', 'activo', 'Rebolledo Cuevas', 'Ronald Daniel'),
+(11, 'pbkdf2_sha256$600000$vjwlm8CgABuq49dXKHyWbd$2AyxMtM/qZFgBB0TsDQymDFHpW4TXKOpj04vI1gsdDg=', '2025-12-16 13:21:52.813187', 0, 'daniel@test.cl', '', '', 0, 1, '2025-12-16 13:21:41.783672', 'daniel@test.cl', 'cliente', 'activo', 'Cuevas', 'Daniel');
 
 -- --------------------------------------------------------
 
@@ -354,7 +360,8 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 (21, 'authtoken', '0003_tokenproxy', '2025-12-01 22:49:54.447575'),
 (22, 'authtoken', '0004_alter_tokenproxy_options', '2025-12-01 22:49:54.450151'),
 (23, 'core', '0002_usuario_apellido_usuario_nombre', '2025-12-01 22:49:54.469630'),
-(24, 'sessions', '0001_initial', '2025-12-01 22:49:54.487993');
+(24, 'sessions', '0001_initial', '2025-12-01 22:49:54.487993'),
+(25, 'core', '0003_evento_imagen', '2025-12-15 22:51:06.616255');
 
 -- --------------------------------------------------------
 
@@ -494,19 +501,19 @@ ALTER TABLE `auth_permission`
 -- AUTO_INCREMENT de la tabla `core_evento`
 --
 ALTER TABLE `core_evento`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT de la tabla `core_reserva`
 --
 ALTER TABLE `core_reserva`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `core_usuario`
 --
 ALTER TABLE `core_usuario`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `core_usuario_groups`
@@ -536,7 +543,7 @@ ALTER TABLE `django_content_type`
 -- AUTO_INCREMENT de la tabla `django_migrations`
 --
 ALTER TABLE `django_migrations`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- Restricciones para tablas volcadas

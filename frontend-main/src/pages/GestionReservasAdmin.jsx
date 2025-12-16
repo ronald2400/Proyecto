@@ -59,6 +59,7 @@ function GestionReservasAdmin() {
 
           <nav className="admin-menu">
             <Link to="/admin">🏠 Inicio</Link>
+            <Link to="/admin/usuarios">👥 Gestión de usuarios</Link>
             <Link to="/admin/eventos">📅 Gestión de eventos</Link>
             <Link to="/admin/reservas" className="active">📋 Gestión de reservas</Link>
             <Link to="/admin/reportes">📊 Reportes</Link>

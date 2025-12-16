@@ -4,6 +4,8 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { useEffect, useState } from "react";
 import Gato from "../assets/Gato.png";
+// Si quieres usar la opción XLSX, instala: npm install xlsx
+import * as XLSX from "xlsx";
 
 function ReportesAdmin() {
   const [reportes, setReportes] = useState([]);
@@ -14,7 +16,6 @@ function ReportesAdmin() {
   const navigate = useNavigate();
 
   useEffect(() => {
- 
     const token = localStorage.getItem("token");
     const rol = localStorage.getItem("user_rol");
 
@@ -23,60 +24,30 @@ function ReportesAdmin() {
         return;
     }
 
-    
     fetch("http://127.0.0.1:8000/api/eventos/", {
         headers: { "Authorization": `Token ${token}` }
     })
       .then(res => res.json())
       .then(data => {
- 
           const datosFormateados = data.map(evento => ({
               id: evento.id,
               evento: evento.nombre,
-              fecha: evento.fecha_inicio, 
-              plazas: evento.capacidad - evento.cupos_disponibles, 
+              fecha: evento.fecha_inicio,
+              plazas: evento.capacidad - evento.cupos_disponibles,
               capacidad: evento.capacidad,
-              asistieron: evento.capacidad - evento.cupos_disponibles 
+              asistieron: evento.capacidad - evento.cupos_disponibles
           }));
           setReportes(datosFormateados);
       })
       .catch(err => console.error("Error cargando reportes:", err));
   }, [navigate]);
 
-  
-  const descargarCSV = () => {
-      const token = localStorage.getItem("token");
-      
-      let url = `http://127.0.0.1:8000/api/reservas/reporte/?`;
-      if (busqueda) url += `search=${busqueda}&`;
-      if (desde) url += `fecha_inicio=${desde}&`; 
-      if (hasta) url += `fecha_fin=${hasta}&`;     
-
-      fetch(url, {
-          headers: { "Authorization": `Token ${token}` }
-      })
-      .then(response => response.blob())
-      .then(blob => {
-          const url = window.URL.createObjectURL(new Blob([blob]));
-          const link = document.createElement('a');
-          link.href = url;
-          link.setAttribute('download', 'reporte_reservas.csv');
-          document.body.appendChild(link);
-          link.click();
-          link.parentNode.removeChild(link);
-      })
-      .catch(err => alert("Error al descargar el reporte"));
-  };
-
-
   const reportesFiltrados = reportes.filter((r) => {
     const coincideTexto = r.evento.toLowerCase().includes(busqueda.toLowerCase());
-    
     const fechaEvento = new Date(r.fecha);
     const desdeObj = desde ? new Date(desde) : null;
     const hastaObj = hasta ? new Date(hasta) : null;
 
- 
     if (desdeObj) desdeObj.setHours(0,0,0,0);
     if (hastaObj) hastaObj.setHours(23,59,59,999);
 
@@ -85,6 +56,131 @@ function ReportesAdmin() {
 
     return coincideTexto && coincideDesde && coincideHasta;
   });
+
+  // ---------- Helper para CSV ----------
+  const escapeCSV = (value) => {
+    if (value == null) return '';
+    const s = String(value);
+    // dobles comillas escapadas como ""
+    return `"${s.replace(/"/g, '""')}"`;
+  };
+
+  const formatDate = (isoDate) => {
+    if (!isoDate) return "";
+    const d = new Date(isoDate);
+    // formato dd/mm/yyyy (cambiar si prefieres otro)
+    return d.toLocaleDateString("es-ES");
+  };
+
+  // Opción 1: generar CSV en cliente (control total sobre columnas y formato)
+  const descargarCSV = () => {
+    if (reportesFiltrados.length === 0) {
+      alert("No hay datos para descargar");
+      return;
+    }
+
+    // Cambia a ',' si prefieres coma como separador
+    const separator = ";";
+
+    const headers = tipoReporte === "ocupacion"
+      ? ["Nombre del evento", "Fecha", "Plazas Ocupadas", "Capacidad Total"]
+      : ["Nombre del evento", "Fecha", "Asistieron", "% Ocupación"];
+
+    const filas = reportesFiltrados.map(r => {
+      const fechaStr = formatDate(r.fecha);
+      if (tipoReporte === "ocupacion") {
+        return [
+          escapeCSV(r.evento),
+          escapeCSV(fechaStr),
+          escapeCSV(r.plazas),
+          escapeCSV(r.capacidad)
+        ].join(separator);
+      } else {
+        const porcentaje = r.capacidad > 0 ? ((r.asistieron / r.capacidad) * 100).toFixed(1) + "%" : "0%";
+        return [
+          escapeCSV(r.evento),
+          escapeCSV(fechaStr),
+          escapeCSV(r.asistieron),
+          escapeCSV(porcentaje)
+        ].join(separator);
+      }
+    });
+
+    // Unir encabezado + filas
+    const contenido = [
+      headers.map(h => escapeCSV(h)).join(separator),
+      ...filas
+    ].join("\n");
+
+    // BOM para Excel + UTF-8 para que muestre acentos
+    const blob = new Blob(["\uFEFF" + contenido], { type: "text/csv;charset=utf-8;" });
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", "reporte_reservas.csv");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    window.URL.revokeObjectURL(url);
+  };
+
+  // Opción 2: generar .xlsx con SheetJS (mejor si quieres abrir en Excel con más fidelidad)
+  const descargarXLSX = () => {
+    if (reportesFiltrados.length === 0) {
+      alert("No hay datos para descargar");
+      return;
+    }
+
+    // Construimos una matriz con objetos (o arrays)
+    const data = reportesFiltrados.map(r => {
+      const fechaStr = formatDate(r.fecha);
+      if (tipoReporte === "ocupacion") {
+        return {
+          "Nombre del evento": r.evento,
+          "Fecha": fechaStr,
+          "Plazas Ocupadas": r.plazas,
+          "Capacidad Total": r.capacidad
+        };
+      } else {
+        const porcentaje = r.capacidad > 0 ? ((r.asistieron / r.capacidad) * 100).toFixed(1) : 0;
+        return {
+          "Nombre del evento": r.evento,
+          "Fecha": fechaStr,
+          "Asistieron": r.asistieron,
+          "% Ocupación": porcentaje
+        };
+      }
+    });
+
+    // Crear workbook y worksheet
+    const ws = XLSX.utils.json_to_sheet(data, { origin: "A1" });
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Reporte");
+
+    // Si quieres forzar tipos numéricos para columnas (ej: % como número), puedes postprocesar celdas
+    // Ejemplo: convertir columna "% Ocupación" a número real si existe
+    if (tipoReporte === "asistencia") {
+      const range = XLSX.utils.decode_range(ws['!ref']);
+      for (let R = range.s.r + 1; R <= range.e.r; ++R) {
+        // Suponiendo que "% Ocupación" está en la 4ta columna (D) — si cambias columnas, ajusta
+        const cellAddress = { c: 3, r: R }; // c=3 => D
+        const cellRef = XLSX.utils.encode_cell(cellAddress);
+        const cell = ws[cellRef];
+        if (cell) {
+          // convertir "12.3" string a número
+          const n = parseFloat(cell.v);
+          if (!isNaN(n)) {
+            cell.v = n;
+            cell.t = "n";
+            // Nota: estilos no garantizados con community SheetJS
+          }
+        }
+      }
+    }
+
+    // Descargar archivo
+    XLSX.writeFile(wb, "reporte_reservas.xlsx");
+  };
 
   const renderTabla = () => {
     if (reportesFiltrados.length === 0) {
@@ -162,6 +258,7 @@ function ReportesAdmin() {
 
           <nav className="admin-menu">
             <Link to="/admin">🏠 Inicio</Link>
+            <Link to="/admin/usuarios">👥 Gestión de usuarios</Link>
             <Link to="/admin/eventos">📅 Gestión de eventos</Link>
             <Link to="/admin/reservas">📋 Gestión de reservas</Link>
             <Link to="/admin/reportes" className="active">📊 Reportes</Link>
@@ -173,8 +270,8 @@ function ReportesAdmin() {
                 style={{
                     cursor: "pointer",
                     color: "inherit",
-                    display: "block",  
-                    width: "100%",      
+                    display: "block",
+                    width: "100%",
                 }}
             >
                 Cerrar sesión
@@ -185,14 +282,23 @@ function ReportesAdmin() {
         <main className="admin-content">
           <div style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
             <h1>Reportes</h1>
-     
-            <button 
-                onClick={descargarCSV}
-                className="admin-btn"
-                style={{backgroundColor: "#2563eb", color: "white", padding: "10px 20px", border: "none", borderRadius: "5px", cursor: "pointer"}}
-            >
-                📥 Descargar Excel (CSV)
-            </button>
+
+            <div style={{display: "flex", gap: "8px"}}>
+              <button
+                  onClick={descargarCSV}
+                  className="admin-btn"
+                  style={{backgroundColor: "#2563eb", color: "white", padding: "10px 20px", border: "none", borderRadius: "5px", cursor: "pointer"}}
+              >
+                  📥 Descargar CSV
+              </button>
+              <button
+                  onClick={descargarXLSX}
+                  className="admin-btn"
+                  style={{backgroundColor: "#059669", color: "white", padding: "10px 20px", border: "none", borderRadius: "5px", cursor: "pointer"}}
+              >
+                  📥 Descargar XLSX
+              </button>
+            </div>
           </div>
 
           <div className="reportes-toolbar">
